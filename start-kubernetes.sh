@@ -1,23 +1,33 @@
 #!/bin/bash
 
-echo -e "\nBuild kiwenlau/kubernetes-cluster:1.0.7 image"
-sudo docker build -f ./kubernetes-cluster/Dockerfile -t kiwenlau/kubernetes-cluster:1.0.7 ./kubernetes-cluster
+# echo -e "\nBuild kiwenlau/kubernetes-cluster:1.0.7 image"
+# sudo docker build -f ./kubernetes-cluster/Dockerfile -t kiwenlau/kubernetes-cluster:1.0.7 ./kubernetes-cluster
 
-docker rm -f kubernetes-master kubernetes-slave1 kubernetes-slave2 kubernetes-slave3 > /dev/null
+# run N slave containers
+N=$1
 
-echo -e "\nRun kubernetes-master container"
-docker run -it -d --name=kubernetes-master kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-master.conf 
+# the defaut slave number is 3
+if [ $# = 0 ]
+then
+  N=3
+fi
 
-echo -e "\n\nRun kubernetes-slave1 container"
-docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave1 --hostname=kubernetes-slave1 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf 
+echo -e "\nstart kubernetes-master container"
+docker rm -f kubernetes-master &> /dev/null
+docker run -it -d --name=kubernetes-master kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-master.conf > /dev/null 
 
-echo -e "\n\nRun kubernetes-slave2 container"
-docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave2 --hostname=kubernetes-slave2 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf
 
-echo -e "\n\nRun kubernetes-slave3 container"
-docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave3 --hostname=kubernetes-slave3 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf  
+i=1
+while [ $i -le $N ]
+do
+  sudo docker rm -f kubernetes-slave$i &> /dev/null
+  echo "start kubernetes-slave$i container..."
+  docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave$i --hostname=kubernetes-slave$i kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf > /dev/null 
+  ((i++))
+done 
 
-echo -e "\n\nGet into kubernetes-master container"
+echo -e "\nGet into kubernetes-master container"
 docker exec -it kubernetes-master bash
+
 
 echo ""
