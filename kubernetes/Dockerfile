@@ -17,7 +17,6 @@ ADD start-kubernetes.sh /usr/local/bin/start-kubernetes.sh
 
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
-# sudo docker build -t kiwenlau/kubernetes-cluster:1.0.7 .
-# 
-
 CMD ["/usr/bin/supervisord"]
+
+# sudo docker build -t kiwenlau/kubernetes-cluster:1.0.7 .
