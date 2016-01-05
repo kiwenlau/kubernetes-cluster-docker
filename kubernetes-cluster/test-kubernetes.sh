@@ -16,9 +16,9 @@ done
 
 echo ""
 
-nginxIP=`kubectl describe pods/nginx | grep IP`
-IP=${nginxIP:7}
-echo -e "The IP address of Nginx Pod is: $IP\n"
-echo -e "wget -qO- $IP\n"
-wget -qO- $IP
-echo ""
+# nginxIP=`kubectl describe pods/nginx | grep IP`
+# IP=${nginxIP:7}
+# echo -e "The IP address of Nginx Pod is: $IP\n"
+# echo -e "wget -qO- $IP\n"
+# wget -qO- $IP
+# echo ""

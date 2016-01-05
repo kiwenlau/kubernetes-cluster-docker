@@ -18,3 +18,5 @@ ADD test-kubernetes.sh /root/test-kubernetes.sh
 
 ADD kubernetes-master.conf /etc/supervisor/conf.d/kubernetes-master.conf
 ADD kubernetes-slave.conf /etc/supervisor/conf.d/kubernetes-slave.conf
+
+VOLUME /var/lib/docker
