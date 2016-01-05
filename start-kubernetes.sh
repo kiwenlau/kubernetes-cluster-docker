@@ -9,13 +9,13 @@ echo -e "\nRun kubernetes-master container"
 docker run -it -d --name=kubernetes-master kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-master.conf 
 
 echo -e "\n\nRun kubernetes-slave1 container"
-docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave1 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf 
+docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave1 --hostname=kubernetes-slave1 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf 
 
 echo -e "\n\nRun kubernetes-slave2 container"
-docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave2 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf
+docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave2 --hostname=kubernetes-slave2 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf
 
 echo -e "\n\nRun kubernetes-slave3 container"
-docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave3 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf  
+docker run -it -d --link kubernetes-master:kubernetes-master --privileged  --name=kubernetes-slave3 --hostname=kubernetes-slave3 kiwenlau/kubernetes-cluster:1.0.7 /usr/bin/supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf  
 
 echo -e "\n\nGet into kubernetes-master container"
 docker exec -it kubernetes-master bash
