@@ -13,8 +13,6 @@ RUN sh /tmp/install-kubernetes.sh
 ADD pod-nginx.yaml /root/pod-nginx.yaml
 ADD test-kubernetes.sh /root/test-kubernetes.sh
 
-ADD start-kubernetes.sh /usr/local/bin/start-kubernetes.sh
-
 ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
