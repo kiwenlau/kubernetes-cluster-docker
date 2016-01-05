@@ -6,6 +6,9 @@ WORKDIR /root
 
 RUN apt-get update && apt-get install -y supervisor wget vim
 
+# Install docker
+RUN wget -qO- https://get.docker.com/ | sh
+
 # Install etcd and kubernetes
 ADD install-kubernetes.sh /tmp/install-kubernetes.sh
 RUN sh /tmp/install-kubernetes.sh
