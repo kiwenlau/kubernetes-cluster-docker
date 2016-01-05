@@ -13,8 +13,5 @@ RUN sh /tmp/install-kubernetes.sh
 ADD pod-nginx.yaml /root/pod-nginx.yaml
 ADD test-kubernetes.sh /root/test-kubernetes.sh
 
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-CMD ["/usr/bin/supervisord"]
-
-# sudo docker build -t kiwenlau/kubernetes-cluster:1.0.7 .
+ADD kubernetes-master.conf /etc/supervisor/conf.d/kubernetes-master.conf
+ADD kubernetes-slave.conf /etc/supervisor/conf.d/kubernetes-slave.conf
