@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo -e "\nBuild kiwenlau/kubernetes-cluster:1.0.7 image"
+sudo docker build -f ./kubernetes-cluster/Dockerfile -t kiwenlau/kubernetes-cluster:1.0.7 ./kubernetes-cluster
+
 docker rm -f kubernetes-master kubernetes-slave > /dev/null
 
 echo -e "\nRun kubernetes-master container"
