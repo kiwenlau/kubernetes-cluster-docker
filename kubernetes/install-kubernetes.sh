@@ -2,11 +2,16 @@
 
 apt-get update
 
-apt-get install -y ca-certificates wget iptables vim
+apt-get install -y ca-certificates iptables
 
 update-ca-certificates
 
 cd /tmp
+
+wget --no-check-certificate  https://github.com/coreos/etcd/releases/download/v2.2.3/etcd-v2.2.3-linux-amd64.tar.gz
+tar xzvf etcd-v2.2.3-linux-amd64.tar.gz
+cp etcd-v2.2.3-linux-amd64/etcd* /usr/local/bin
+rm -rf etcd-v2.2.3-linux-amd64.tar.gz etcd-v2.2.3-linux-amd64
 
 # Download the release file of Kubernetes 1.0.7
 wget https://github.com/kubernetes/kubernetes/releases/download/v1.0.7/kubernetes.tar.gz

@@ -1,2 +1,2 @@
-#基于Docker快速搭建单机版Kuberntes
+#基于Docker快速搭建Kuberntes集群
 
