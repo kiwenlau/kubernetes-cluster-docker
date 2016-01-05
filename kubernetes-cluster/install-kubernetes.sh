@@ -1,10 +1,10 @@
 #!/bin/bash
 
-apt-get update
+# apt-get update
 
-apt-get install -y ca-certificates iptables
+# apt-get install -y ca-certificates iptables
 
-update-ca-certificates
+# update-ca-certificates
 
 cd /tmp
 
@@ -32,7 +32,7 @@ cp kubernetes/server/bin/kubelet /usr/local/bin/
 cp kubernetes/platforms/linux/amd64/kubectl /usr/local/bin/
 
 ## Delete useless files and packages
-rm -rf /tmp/*
-apt-get remove -y ca-certificates
-apt-get clean -y
-apt-get autoremove -y
+# rm -rf /tmp/*
+# apt-get remove -y ca-certificates
+# apt-get clean -y
+# apt-get autoremove -y

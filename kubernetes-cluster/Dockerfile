@@ -4,7 +4,7 @@ MAINTAINER kiwenlau <kiwenlau@gmail.com>
 
 WORKDIR /root
 
-RUN apt-get update && apt-get install -y supervisor wget vim
+RUN apt-get update && apt-get install -y supervisor wget vim iptables
 
 # Install docker
 RUN wget -qO- https://get.docker.com/ | sh
