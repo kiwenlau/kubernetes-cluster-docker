@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# echo -e "\nBuild kiwenlau/kubernetes-cluster:1.0.7 image"
-# sudo docker build -f ./kubernetes-cluster/Dockerfile -t kiwenlau/kubernetes-cluster:1.0.7 ./kubernetes-cluster
+ # echo -e "\nBuild kiwenlau/kubernetes-cluster:1.0.7 image"
+ # sudo docker build -f ./kubernetes-cluster/Dockerfile -t kiwenlau/kubernetes-cluster:1.0.7 ./kubernetes-cluster
 
 # run N slave containers
 N=$1
@@ -22,7 +22,7 @@ while [ $i -le $N ]
 do
   sudo docker rm -f kubernetes-slave$i &> /dev/null
   echo "start kubernetes-slave$i container..."
-  sudo docker run -it -d --link kubernetes-master:kubernetes-master -e "KUBERNETES_MASTER=http://kubernetes-master:8080" --privileged  --name=kubernetes-slave$i --hostname=kubernetes-slave$i kiwenlau/kubernetes-cluster:1.0.7 supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf > /dev/null 
+  sudo docker run -it -d --link kubernetes-master:kubernetes-master -e "ENV_KUBERNETES_MASTER=http://kubernetes-master:8080" -e "KUBERNETES_MASTER=http://kubernetes-master:8080" --privileged  --name=kubernetes-slave$i --hostname=kubernetes-slave$i kiwenlau/kubernetes-cluster:1.0.7 supervisord --configuration=/etc/supervisor/conf.d/kubernetes-slave.conf > /dev/null 
   ((i++))
 done 
 

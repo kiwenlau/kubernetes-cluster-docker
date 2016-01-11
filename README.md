@@ -11,7 +11,7 @@ Kubernetes Slave采用了Docker-in-Docker模式，因此，由Kubernetes启动�
 
 在Docker容器中运行多个线程最直接的方法是使用shell脚本启动多个线程。然而，当Kubernetes Master中的各个组件以后台程序形式启动之后，shell脚本将会退出，Docker容器也跟着退出了。因为shell脚本是容器启动的第1个线程，PID为1，1号线程退出时，Docker容器则会退出。当然，可以在shell脚本的最后启动一个不退出的前台程序，例如bash，使得shell脚本不退出即可。
 
-![alt text](https://github.com/kiwenlau/kubernetes-cluster-docker/raw/master/kubernetes-cluster-docker.png "Image Architecture")
+![alt text](https://github.com/kiwenlau/kubernetes-cluster-docker/raw/master/kubernetes-cluster-docker.png)
 
 
 ##运行步骤
